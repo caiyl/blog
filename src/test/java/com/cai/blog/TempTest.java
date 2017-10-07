@@ -40,4 +40,11 @@ public class TempTest extends TestCase {
             }
         }
     }
+    @Test
+    public void testType(){
+
+
+
+
+    }
 }

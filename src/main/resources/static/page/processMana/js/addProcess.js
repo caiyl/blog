@@ -7,7 +7,7 @@ function save() {
         if (dat.successFlag) {
             parent.layer.open({
                 type: 2,
-                title: '新增流程',
+                title: '新增流程。',
                 shadeClose: true,
                 shade: false,
                 maxmin: true, //开启最大化最小化按钮

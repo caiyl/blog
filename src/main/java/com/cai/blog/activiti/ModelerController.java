@@ -1,6 +1,7 @@
 package com.cai.blog.activiti;
 
 import com.cai.blog.common.RestServiceController;
+import com.cai.blog.common.Result;
 import com.cai.blog.util.Status;
 import com.cai.blog.util.ToWeb;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by caiyl on 2017/10/6.
@@ -28,7 +30,7 @@ import java.util.List;
  * 模型管理
  */
 @RestController
-@RequestMapping("models")
+@RequestMapping("/models")
 public class ModelerController implements RestServiceController<Model, String> {
 
     @Autowired
@@ -41,16 +43,23 @@ public class ModelerController implements RestServiceController<Model, String> {
      * @return
      * @throws UnsupportedEncodingException
      */
-    @PostMapping("newModel")
-    public Object newModel() throws UnsupportedEncodingException {
+    @PostMapping("/newModel")
+    @ResponseBody
+    public Result newModel(@RequestParam Map<String,String> pmap) throws UnsupportedEncodingException {
+        Result result = new Result();
         //初始化一个空模型
         Model model = repositoryService.newModel();
 
         //设置一些默认信息
-        String name = "new-process";
+/*        String name = "new-process";
         String description = "";
         int revision = 1;
-        String key = "process";
+        String key = "process";*/
+
+        String name = pmap.get("name");
+        String description = pmap.get("description");
+        int revision = 1;
+        String key = pmap.get("key");
 
         ObjectNode modelNode = objectMapper.createObjectNode();
         modelNode.put(ModelDataJsonConstants.MODEL_NAME, name);
@@ -73,7 +82,10 @@ public class ModelerController implements RestServiceController<Model, String> {
                 "http://b3mn.org/stencilset/bpmn2.0#");
         editorNode.put("stencilset", stencilSetNode);
         repositoryService.addModelEditorSource(id,editorNode.toString().getBytes("utf-8"));
-        return ToWeb.buildResult().redirectUrl("/modeler.html?modelId="+id);
+//        return ToWeb.buildResult().redirectUrl("/modeler.html?modelId="+id);
+        result.setMessage(id);
+        result.setSuccessFlag(true);
+        return result;
     }
 
 

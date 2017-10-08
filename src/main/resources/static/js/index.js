@@ -7,11 +7,25 @@ $(function () {
 
     tool.push({
         text: '新增流程', iconCls: 'fa fa-plus icolor', btnCls: 'btn jqgrid-tool-btn', handler: function () {
-            AJAX.POST('/models/newModel')
+            // AJAX.POST('/models/newModel')
+            //iframe窗
+            layer.open({
+                type: 2,
+                title: '新增流程',
+                shadeClose: true,
+                shade: false,
+                maxmin: true, //开启最大化最小化按钮
+                area: ['60%', '50%'],
+                offset: 't',
+                content: ['/page/processMana/addProcess.html','no']
+                // content: '/modeler.html?modelId=17504'
+            });
         }
     });
     tool.push({
         text: '批量删除', iconCls: 'fa fa-plus icolor', btnCls: 'btn jqgrid-tool-btn', handler: function () {
+            layer.msg('Hello World');
+            AJAX.POST('/models/newModel')
         }
     });
 
@@ -42,6 +56,8 @@ $(function () {
         height: "100%",
         autowidth: true
     });
+    
+
 
 
 });

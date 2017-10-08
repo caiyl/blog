@@ -6,6 +6,12 @@
 .ui-th-div{
     height: 25px !important;
 }
+.ui-th-div:hover{
+    color: #FFFFFF;
+    background: #003e75 !important;
+    font-size: 16px;
+    height: 25px !important;
+}
 .jqgrow{
     font-size: 16px;
 }
@@ -13,4 +19,8 @@
     background: #08c !important;
     margin-left: 2px !important;
     color: #ffffff;
+}
+.layui-layer-title{
+    background-color: #2F4056 !important;
+    color: #ffffff !important;
 }

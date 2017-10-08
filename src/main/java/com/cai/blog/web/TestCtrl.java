@@ -22,7 +22,9 @@ public class TestCtrl {
 
     @RequestMapping("/testjqgird")
     @ResponseBody
-    public List<Map<String,String>> hello(){
+    public Map<String,Object> hello(){
+        Map<String,Object> retMap = new HashMap<String,Object>();
+
         List<Map<String,String>> retList = new ArrayList<Map<String,String>>();
         System.out.println(env.getProperty("host"));
         for (int i = 0; i < 20; i++) {
@@ -42,6 +44,14 @@ public class TestCtrl {
             retList.add(map);
         }
 
-        return retList;
+
+        retMap.put("page","1");
+        retMap.put("records","20");
+        retMap.put("rows",retList);
+        retMap.put("total","20");
+        retMap.put("total","10000");
+
+
+        return retMap;
     }
 }

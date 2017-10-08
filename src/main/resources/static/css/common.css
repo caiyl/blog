@@ -1,0 +1,16 @@
+.ui-jqgrid-htable{
+    color: #FFFFFF;
+    background: #003e75;
+    font-size: 16px;
+}
+.ui-th-div{
+    height: 25px !important;
+}
+.jqgrow{
+    font-size: 16px;
+}
+.jqgrid-tool-btn{
+    background: #08c !important;
+    margin-left: 2px !important;
+    color: #ffffff;
+}

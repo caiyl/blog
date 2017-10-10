@@ -26,17 +26,17 @@ public class ProcessModelCtrl {
 
     @RequestMapping("/models")
     @ResponseBody
-    public Map<String,Object> getList(@RequestParam(value = "rowSize", defaultValue = "1000", required = false) Integer rowSize,
+    public Map<String,Object> getList(@RequestParam(value = "rows", defaultValue = "1000", required = false) Integer rows,
                           @RequestParam(value = "page", defaultValue = "1", required = false) Integer page) {
-        List<Model> list = repositoryService.createModelQuery().listPage(rowSize * (page - 1)
-                , rowSize);
+        List<Model> list = repositoryService.createModelQuery().listPage(rows * (page - 1)
+                , rows);
         long count = repositoryService.createModelQuery().count();
 
         Map<String,Object> retMap = new HashMap<String,Object>();
         retMap.put("page",page);
         retMap.put("records",count);
         retMap.put("rows",list);
-        retMap.put("total",(int) (count/rowSize+1));
+        retMap.put("total",(int) (count/rows+1));
 
 
         return retMap;

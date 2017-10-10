@@ -31,6 +31,7 @@ public class Application {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(Application.class);
 
+
 	@Bean
 	RedisMessageListenerContainer container(RedisConnectionFactory connectionFactory,
 			MessageListenerAdapter listenerAdapter) {

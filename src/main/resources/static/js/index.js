@@ -37,23 +37,23 @@ $(function () {
         toolbar: [true, "top", tool],
         colNames: ["流程id", "流程名称", "版本", "流程key值", "是否已部署", "创建时间","更新时间","操作"],
         colModel: [
-            { name: "id", width: 55 },
-            { name: "name", width: 90 },
-            { name: "version", width: 80, align: "right" },
-            { name: "key", width: 80, align: "right" },
-            { name: "name", width: 80, align: "right" },
-            { name: "createTime", width: 150, align: "right" ,formatter:function(cellvalue, options, rowObject) {
+            { name: "id", width: 55,align: "center" },
+            { name: "name", width: 90 ,align: "center"},
+            { name: "version", width: 80, align: "center" },
+            { name: "key", width: 80, align: "center" },
+            { name: "name", width: 80, align: "center" },
+            { name: "createTime", width: 150, align: "center" ,formatter:function(cellvalue, options, rowObject) {
                 return Utils.formatDate(cellvalue)
             }},
-            { name: "lastUpdateTime", width: 150, align: "right" ,formatter:function(cellvalue, options, rowObject) {
+            { name: "lastUpdateTime", width: 150, align: "center" ,formatter:function(cellvalue, options, rowObject) {
                 return Utils.formatDate(cellvalue)
             }},
-            { name:"action",algin:"center" ,formatter:function (cellvalue, options, rowObject) {
+            { name:"action",align:"center" ,formatter:function (cellvalue, options, rowObject) {
                 var actionHtml=new Array();
                 actionHtml.push("<button  class='btn btn-info'  onClick=\"edit('"+rowObject.id+"');\"  >编辑</button>");
                 actionHtml.push("<button   class='btn btn-danger' style='margin-left: 5px' onClick=\"delModel('"+rowObject.id+"');\"  >删除</button>");
                 actionHtml.push("<button   class='btn btn-warning' style='margin-left: 5px' onClick=\"publish('"+rowObject.id+"');\"  >发布</button>");
-                return '<div class="btn-group">'+actionHtml.join("")+'</div>';
+                return '<div class="btn-group btn-group-xs">'+actionHtml.join("")+'</div>';
             } }
         ],
         pager: "#jqGridPager",

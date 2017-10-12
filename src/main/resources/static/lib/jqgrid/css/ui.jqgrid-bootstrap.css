@@ -454,7 +454,7 @@ div.tablediv > .table-bordered {
 .ui-jqgrid .ui-userdata {
     padding: 4px 0px;
     overflow: hidden;
-    min-height: 32px;
+    min-height: 36px;
 }
 .ui-jqgrid .ui-userdata-top {
     border-left-width: 0px;    /*default*/

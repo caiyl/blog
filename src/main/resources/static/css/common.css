@@ -6,17 +6,17 @@
 .ui-th-div{
     height: 25px !important;
 }
-.ui-th-div:hover{
+.ui-th-column:hover{
     color: #FFFFFF;
     background: #003e75 !important;
-    font-size: 16px;
+    /*font-size: 16px;*/
     height: 25px !important;
 }
 .jqgrow{
     font-size: 16px;
 }
 .jqgrid-tool-btn{
-    background: #08c !important;
+    background: #77ccbe !important;
     margin-left: 2px !important;
     color: #ffffff;
 }

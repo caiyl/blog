@@ -35,11 +35,11 @@
         <div class="btn-group">
             <div class="btn-group">
                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">Primary <span class="caret"></span></button>
+                        aria-haspopup="true" aria-expanded="false">系统管理 <span class="caret"></span></button>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
+                    <li><a href="page/userMana/userList.html" target="myIframe">用户管理</a></li>
+                    <li><a href="#">角色管理</a></li>
+                    <li><a href="#">部门管理</a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href="#">Separated link</a></li>
                 </ul>
@@ -81,7 +81,7 @@
                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">流程管理 <span class="caret"></span></button>
                 <ul class="dropdown-menu">
-                    <li><a href="#">流程定义</a></li>
+                    <li><a href="page/processMana/processList.html" target="myIframe">流程定义</a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href="#">环节配置</a></li>
                     <li role="separator" class="divider"></li>
@@ -92,40 +92,7 @@
         </div>
     </div>
 </header>
-
-<div>
-
-    <!-- 当前路径-->
-    <ol class="breadcrumb">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Library</a></li>
-        <li class="active">Data</li>
-    </ol>
-
-    <!-- 查询表单-->
-
-    <form class="form-inline">
-        <div class="form-group">
-            <label for="flowName">流程名称</label>
-            <input type="text" class="form-control" id="flowName" placeholder="请输入流程名称...">
-        </div>
-        <div class="form-group">
-            <label for="creatUser">创建人</label>
-            <input type="text" class="form-control" id="creatUser" placeholder="请输入创建人...">
-        </div>
-        <button type="submit" class="btn btn-info btn-group btn-group-sm">查询</button>
-    </form>
-
-    <br/>
-
-    <!--主体内容-->
-
-    <div id="mainContent">
-        <table id="jqGridList"></table>
-        <div id="jqGridPager"></div>
-    </div>
-
-</div>
+<iframe name="myIframe" id="myIframe"   onload="this.height=myIframe.document.body.scrollHeight" width="100%" scrolling="no" frameborder="0"></iframe>
 
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

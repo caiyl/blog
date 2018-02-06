@@ -1,10 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cai.blog.mapper.UserMapper" >
     <resultMap id="BaseResultMap" type="com.cai.blog.entity.UserEntity" >
-        <id column="id" property="id" jdbcType="VARCHAR" />
-        <result column="user_name" property="userName" jdbcType="VARCHAR" />
-        <result column="user_name_cn" property="userNameCN" jdbcType="VARCHAR" />
-        <result column="password" property="password" javaType="VARCHAR"/>
-        <result column="user_sex" property="userSex" jdbcType="VARCHAR" />
+        <id column="id" property="id"  />
+        <result column="user_name" property="userName"  />
+        <result column="user_name_cn" property="userNameCN"  />
+        <result column="password" property="password" />
+        <result column="user_sex" property="userSex"  />
     </resultMap>
 
     <sql id="Base_Column_List" >
@@ -50,4 +54,22 @@
         WHERE
         id =#{id}
     </delete>
+
+
+    <select id="queryAllByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM t_user
+        where 1=1
+        <if test="userNameCN != null"> and user_name_cn = #{userNameCN}</if>
+    </select>
+
+    <select id="queryAllCountByMap" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT
+        count(*)
+        FROM t_user
+        where 1=1
+        <if test="userNameCN != null"> and user_name_cn = #{userNameCN}</if>
+    </select>
+
 </mapper>

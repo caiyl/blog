@@ -51,10 +51,6 @@ public class ModelerController implements RestServiceController<Model, String> {
         Model model = repositoryService.newModel();
 
         //设置一些默认信息
-/*        String name = "new-process";
-        String description = "";
-        int revision = 1;
-        String key = "process";*/
 
         String name = pmap.get("name");
         String description = pmap.get("description");
@@ -82,7 +78,7 @@ public class ModelerController implements RestServiceController<Model, String> {
                 "http://b3mn.org/stencilset/bpmn2.0#");
         editorNode.put("stencilset", stencilSetNode);
         repositoryService.addModelEditorSource(id,editorNode.toString().getBytes("utf-8"));
-//        return ToWeb.buildResult().redirectUrl("/modeler.html?modelId="+id);
+
         result.setMessage(id);
         result.setSuccessFlag(true);
         return result;
@@ -149,6 +145,11 @@ public class ModelerController implements RestServiceController<Model, String> {
         );
     }
 
+    /**
+     * 删除流程模型
+     * @param id 标识
+     * @return
+     */
     public Object deleteOne(@PathVariable("id")String id){
         repositoryService.deleteModel(id);
         return ToWeb.buildResult().refresh();

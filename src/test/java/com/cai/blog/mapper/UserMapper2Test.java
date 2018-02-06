@@ -18,7 +18,7 @@ import java.util.List;
 public class UserMapper2Test {
 
     @Autowired
-    private UserMapper UserMapper;
+    private UserMapper3 UserMapper;
 
    /* @Test
     public void testInsert() throws Exception {

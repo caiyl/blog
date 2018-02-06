@@ -8,7 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
 
 /**
- * Created by caiyl on 2017/10/5.
+ * 主要引入了这里SpringProcessEngineConfiguration，就可以在其他bean中直接植入activiti的7大服务了，
+ * 如在com.cai.blog.activiti.model.ModelSaveRestResource中注入RepositoryService
  */
 @Configuration
 public class ActivitiConfig {

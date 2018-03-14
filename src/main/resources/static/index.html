@@ -25,9 +25,9 @@
 </head>
 <body>
 <header>
-    <!--<h1 style="text-align: center">-->
-        <!--welcome to blog！-->
-    <!--</h1>-->
+    <h1 style="text-align: center">
+        <span style="font-size: 18px" id="userInfo"></span> <button style="font-size: 18px;margin-left: 10px" onclick="loginOut()">注销</button>
+    </h1>
 
     <div style="text-align: center">
 
@@ -38,7 +38,7 @@
                         aria-haspopup="true" aria-expanded="false">系统管理 <span class="caret"></span></button>
                 <ul class="dropdown-menu">
                     <li><a href="page/userMana/userList.html" target="myIframe">用户管理</a></li>
-                    <li><a href="#">角色管理</a></li>
+                    <li><a href="page/roleMana/roleList.html" target="myIframe">角色管理</a></li>
                     <li><a href="#">部门管理</a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href="#">Separated link</a></li>
@@ -46,13 +46,13 @@
             </div><!-- /btn-group -->
             <div class="btn-group">
                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">Success <span class="caret"></span></button>
+                        aria-haspopup="true" aria-expanded="false">请假<span class="caret"></span></button>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
+                    <li><a  href="page/leave/addLeave.html" target="myIframe">请假申请</a></li>
+                    <li><a  href="page/leave/backlogLeave.html" target="myIframe">请假待办</a></li>
+                    <li><a href="#" target="myIframe">运行中流程</a></li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
+                    <li><a href="#" target="myIframe">已结束流程</a></li>
                 </ul>
             </div><!-- /btn-group -->
             <div class="btn-group">

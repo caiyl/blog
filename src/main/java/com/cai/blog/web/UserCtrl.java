@@ -1,16 +1,17 @@
 package com.cai.blog.web;
 
-import com.cai.blog.entity.UserEntity;
+import com.cai.blog.common.Result;
+import com.cai.blog.entity.Role;
+import com.cai.blog.entity.User;
+import com.cai.blog.entity.UserRole;
 import com.cai.blog.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
-@RequestMapping(value = "/users")
+@RequestMapping(value = "/user")
 public class UserCtrl {
 
     @Autowired
@@ -26,7 +27,7 @@ public class UserCtrl {
                                  @RequestParam(value = "page", defaultValue = "1", required = false) Integer page){
 
         Map<String, String> map = new HashMap<String, String>();
-        List<UserEntity> list = userMapper.queryAllByMap(map);
+        List<User> list = userMapper.queryAllByMap(map);
         int count = userMapper.queryAllCountByMap(map);
 
         Map<String,Object> retMap = new HashMap<String,Object>();
@@ -49,9 +50,37 @@ public class UserCtrl {
      * @return
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    String postUser(@ModelAttribute UserEntity user){
+    String postUser(@ModelAttribute User user){
+        user.setId(UUID.randomUUID().toString().replaceAll("-",""));
+
+        if (Objects.nonNull(userMapper.queryByUserName(user.getUserName()))) {
+            return Result.FAILED_CODE;
+        }
         userMapper.insert(user);
-        return "0";
+        return Result.SUCCESS_CODE;
+    }
+
+    /**
+     * 保存角色
+     * @param roleCodeList
+     * @return
+     */
+    @RequestMapping(value = "/{userName}", method = RequestMethod.POST)
+    String postUser(@PathVariable String userName,@RequestBody List<String> roleCodeList ){
+        userMapper.deleteUserRole(userName);
+        List<UserRole> userRoleList = new ArrayList<UserRole>();
+        for (String roleCode : roleCodeList) {
+            UserRole role = new UserRole();
+            role.setUserName(userName);
+            role.setRoleCode(roleCode);
+            userRoleList.add(role);
+        }
+
+        if (!userRoleList.isEmpty()) {
+            userMapper.addUserRoleBatch(userRoleList);
+        }
+
+        return Result.SUCCESS_CODE;
     }
 
     /**
@@ -60,19 +89,19 @@ public class UserCtrl {
      * @return
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    UserEntity getUser(@PathVariable Long id){
-        return userMapper.queryById(id);
+    User getUser(@PathVariable String id){
+        return userMapper.getOne(id);
     };
 
     /**
      * 修改
-     * @param id
      * @param user
      * @return
      */
-    @RequestMapping(value="/{id}", method=RequestMethod.PUT)
-    String putUser(@PathVariable Long id, @ModelAttribute UserEntity user){
-        return "0";
+    @RequestMapping(value = "/",method=RequestMethod.PUT)
+    String putUser( @ModelAttribute User user){
+        userMapper.update(user);
+        return Result.SUCCESS_CODE;
     };
 
     /**
@@ -81,8 +110,27 @@ public class UserCtrl {
      * @return
      */
     @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-    String deleteUser(@PathVariable Long id){
+    String deleteUser(@PathVariable String id){
         userMapper.delete(id);
-        return "0";
+        return Result.SUCCESS_CODE;
+    };
+
+    /**
+     * 查询可以供该用户配置的角色
+     * @param userName
+     * @return
+     */
+    @RequestMapping(value = "/candidateRole/{userName}", method = RequestMethod.GET)
+    List<Role> getCandidateRole(@PathVariable String userName){
+        return userMapper.getCandidateRole(userName);
+    };
+    /**
+     * 查询用户已经配置的角色
+     * @param userName
+     * @return
+     */
+    @RequestMapping(value = "/userRole/{userName}", method = RequestMethod.GET)
+    List<Role> getUserRole(@PathVariable String userName){
+        return userMapper.getUserRole(userName);
     };
 }

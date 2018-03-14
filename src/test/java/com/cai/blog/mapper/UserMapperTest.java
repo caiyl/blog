@@ -1,6 +1,6 @@
 package com.cai.blog.mapper;
 
-import com.cai.blog.entity.UserEntity;
+import com.cai.blog.entity.User;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,29 +18,29 @@ import java.util.List;
 public class UserMapperTest {
 
     @Autowired
-    private UserMapper3 UserMapper;
+    private UserMapper userMapper;
 
    /* @Test
     public void testInsert() throws Exception {
-        UserMapper.insert(new UserEntity("1", "zhangsan", "张三", "1", "1"));
-        UserMapper.insert(new UserEntity("2", "lisi", "张三", "1", "1"));
-        UserMapper.insert(new UserEntity("3", "wangwu", "王五", "1", "1"));
+        userMapper.insert(new UserEntity("1", "zhangsan", "张三", "1", "1"));
+        userMapper.insert(new UserEntity("2", "lisi", "张三", "1", "1"));
+        userMapper.insert(new UserEntity("3", "wangwu", "王五", "1", "1"));
 
-        Assert.assertEquals(3, UserMapper.getAll().size());
+        Assert.assertEquals(3, userMapper.getAll().size());
     }*/
 
     @Test
     public void testQuery() throws Exception {
-        List<UserEntity> users = UserMapper.getAll();
+        List<User> users = userMapper.getAll();
         System.out.println(users.toString());
     }
 
     @Test
     public void testUpdate() throws Exception {
-        UserEntity user = UserMapper.getOne(3l);
+        User user = userMapper.getOne("31");
         System.out.println(user.toString());
         user.setUserNameCN("王五1");
-        UserMapper.update(user);
-        Assert.assertTrue(("王五1".equals(UserMapper.getOne(3l).getUserNameCN())));
+        userMapper.update(user);
+        Assert.assertTrue(("王五1".equals(userMapper.getOne("31").getUserNameCN())));
     }
 }

@@ -1,6 +1,6 @@
 package com.cai.blog.mapper;
 
-import com.cai.blog.entity.UserEntity;
+import com.cai.blog.entity.User;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public interface UserMapper3 {
             @Result(property = "userSex",  column = "user_sex")
 
     })
-    List<UserEntity> getAll();
+    List<User> getAll();
 
     @Select("SELECT * FROM t_user WHERE id = #{id}")
     @Results({
@@ -30,14 +30,14 @@ public interface UserMapper3 {
             @Result(property = "password",  column = "password" ),
             @Result(property = "userSex",  column = "user_sex" ),
     })
-    UserEntity getOne(Long id);
+    User getOne(Long id);
 
     @Insert("INSERT INTO t_user(id,user_name,user_name_cn,password,user_sex) " +
             "VALUES(#{id}, #{userName}, #{userNameCN}, #{password}, #{userSex})")
-    void insert(UserEntity user);
+    void insert(User user);
 
     @Update("UPDATE t_user SET user_name=#{userName},user_name_cn=#{userNameCN},password=#{password},user_sex=#{userSex} WHERE id =#{id}")
-    void update(UserEntity user);
+    void update(User user);
 
     @Delete("DELETE FROM user WHERE id =#{id}")
     void delete(Long id);

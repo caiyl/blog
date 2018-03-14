@@ -3,12 +3,18 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cai.blog.mapper.UserMapper" >
-    <resultMap id="BaseResultMap" type="com.cai.blog.entity.UserEntity" >
+    <resultMap id="BaseResultMap" type="com.cai.blog.entity.User" >
         <id column="id" property="id"  />
         <result column="user_name" property="userName"  />
         <result column="user_name_cn" property="userNameCN"  />
         <result column="password" property="password" />
         <result column="user_sex" property="userSex"  />
+    </resultMap>
+
+    <resultMap id="RoleMap" type="com.cai.blog.entity.Role" >
+        <id column="id" property="id"  />
+        <result column="role_code" property="roleCode"  />
+        <result column="role_name" property="roleName"  />
     </resultMap>
 
     <sql id="Base_Column_List" >
@@ -21,14 +27,15 @@
         FROM t_user
     </select>
 
-    <select id="getOne" parameterType="java.lang.Long" resultMap="BaseResultMap" >
+    <select id="getOne" parameterType="java.lang.String" resultMap="BaseResultMap" >
         SELECT
         <include refid="Base_Column_List" />
         FROM t_user
         WHERE id = #{id}
     </select>
 
-    <insert id="insert" parameterType="com.cai.blog.entity.UserEntity" >
+
+    <insert id="insert" parameterType="com.cai.blog.entity.User" >
         INSERT INTO
         t_user
         (id, user_name, user_name_cn, password, user_sex)
@@ -36,7 +43,7 @@
         (#{id}, #{userName}, #{userNameCN}, #{password}, #{userSex})
     </insert>
 
-    <update id="update" parameterType="com.cai.blog.entity.UserEntity" >
+    <update id="update" parameterType="com.cai.blog.entity.User" >
         UPDATE
         t_user
         SET
@@ -48,7 +55,7 @@
         id = #{id}
     </update>
 
-    <delete id="delete" parameterType="java.lang.Long" >
+    <delete id="delete" parameterType="java.lang.String" >
         DELETE FROM
         t_user
         WHERE
@@ -71,5 +78,40 @@
         where 1=1
         <if test="userNameCN != null"> and user_name_cn = #{userNameCN}</if>
     </select>
+
+    <select id="queryByUserName" parameterType="java.lang.String" resultMap="BaseResultMap" >
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM t_user
+        WHERE user_name = #{userName}
+    </select>
+
+    <select id="getCandidateRole" parameterType="java.lang.String" resultMap="RoleMap" >
+        SELECT
+        id, role_code, role_name
+        FROM t_role r
+        where  not EXISTS (SELECT 1 from t_user_role u where u.user_name = #{userName} and u.role_code=r.role_code  )
+    </select>
+
+    <select id="getUserRole" parameterType="java.lang.String" resultMap="RoleMap" >
+        SELECT
+        id, role_code, role_name
+        FROM t_role r
+        where   EXISTS (SELECT 1 from t_user_role u where u.user_name = #{userName} and u.role_code=r.role_code  )
+    </select>
+
+    <delete id="deleteUserRole" parameterType="java.lang.String"  >
+        DELETE FROM
+        t_user_role
+        WHERE user_name = #{userName}
+    </delete>
+
+    <insert id="addUserRoleBatch"  parameterType="java.util.List">
+        insert into t_user_role (user_name,role_code)
+        values
+        <foreach collection="list" item="item" index="index" separator="," >
+            (#{item.userName},#{item.roleCode})
+        </foreach>
+    </insert>
 
 </mapper>

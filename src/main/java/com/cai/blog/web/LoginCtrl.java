@@ -1,20 +1,49 @@
 package com.cai.blog.web;
 
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import com.cai.blog.entity.Leave;
+import com.cai.blog.entity.User;
+import com.cai.blog.mapper.UserMapper;
+import com.cai.blog.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by caiyl on 2017/3/31.
  */
 @RestController
+@RequestMapping("/login")
 public class LoginCtrl {
 
-    @RequestMapping("/login")
+    @Autowired
+    private UserService userService;
+
     @ResponseBody
-    public String hello(){
-        return "Hello! login!";
+    @RequestMapping(value = "/loginState",method = RequestMethod.GET)
+    public Object loginState(HttpServletRequest request){
+        return request.getSession().getAttribute("user");
+    }
+    @ResponseBody
+    @RequestMapping(value = "/loginOut",method = RequestMethod.GET)
+    public String loginOut(HttpServletRequest request){
+        request.getSession().removeAttribute("user");
+        return "0";
+    }
+
+    @RequestMapping(value = "/loginIn", method = RequestMethod.POST)
+    public String applyLeave(@ModelAttribute User user,HttpServletRequest request){
+
+        User userDB = userService.isExists(user);
+        if ((userDB != null && userDB.getPassword().equals(user.getPassword()))) {
+            System.out.println("登录成功。。。");
+            request.getSession().setAttribute("user",userDB);
+            return "0";
+        }else{
+            System.out.println("登录失败。。。");
+            return "1";
+        }
     }
 
 

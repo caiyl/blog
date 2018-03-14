@@ -24,7 +24,7 @@ $(function () {
 
 
     $("#jqGridList").jqGrid({
-        url: "/user/",
+        url: "/leave/todoList",
         datatype: "json",
         mtype: "GET",
         styleUI: 'Bootstrap',

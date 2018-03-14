@@ -23,35 +23,19 @@
 </head>
 <body>
 <form class="form-horizontal">
+    <input type="hidden" id="id" name="id">
     <div class="form-group">
-        <label for="userName" class="col-sm-2 control-label">账号</label>
+        <label for="roleCode" class="col-sm-2 control-label">编号</label>
         <div class="col-sm-9">
-            <input type="text" class="form-control" id="userName" name="userName" placeholder="请输入流程名称。。。">
+            <input type="text" class="form-control" id="roleCode" name="roleCode" placeholder="请输入编号。。。">
         </div>
         <div class="col-sm-1">
         </div>
     </div>
     <div class="form-group">
-        <label for="userNameCN" class="col-sm-2 control-label">名称</label>
+        <label for="roleName" class="col-sm-2 control-label">名称</label>
         <div class="col-sm-9">
-            <input type="text" class="form-control" id="userNameCN" name="userNameCN" placeholder="请输入流程key值。。。">
-        </div>
-        <div class="col-sm-1">
-        </div>
-    </div>
-    <div class="form-group">
-        <label  class="col-sm-2 control-label">性别</label>
-        <div class="col-sm-9">
-            男：<input type="radio" class="radio-inline"  name="userSex" value="F">
-            女：<input type="radio" class="radio-inline"  name="userSex" value="M">
-        </div>
-        <div class="col-sm-1">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="password" class="col-sm-2 control-label">密码</label>
-        <div class="col-sm-9">
-            <input type="text" class="form-control" id="password" name="password" placeholder="请输入流程key值。。。">
+            <input type="text" class="form-control" id="roleName" name="roleName" placeholder="请输入流程key值。。。">
         </div>
         <div class="col-sm-1">
         </div>
@@ -78,6 +62,6 @@
 <script src="../../js/jquery.cookie.js"></script>
 <script src="../../js/ajax-util.js"></script>
 
-<script src="js/addUser.js"></script>
+<script src="js/editRole.js"></script>
 </body>
 </html>

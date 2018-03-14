@@ -1,6 +1,8 @@
 package com.cai.blog.mapper;
 
-import com.cai.blog.entity.UserEntity;
+import com.cai.blog.entity.Role;
+import com.cai.blog.entity.User;
+import com.cai.blog.entity.UserRole;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -10,21 +12,15 @@ import java.util.Map;
  * Created by caiyl on 2017/10/2.
  */
 @Mapper
-public interface UserMapper {
-    List<UserEntity> getAll();
+public interface UserMapper extends BaseMapper<User> {
 
-    UserEntity getOne(Long id);
+    public User queryByUserName(String userName);
 
-    void insert(UserEntity user);
+    List<Role> getCandidateRole(String userName);
 
-    void update(UserEntity user);
+    List<Role> getUserRole(String userName);
 
-    void delete(Long id);
+    void deleteUserRole(String userName);
 
-
-    UserEntity queryById(Long id);
-
-    List<UserEntity> queryAllByMap(Map<String,String> map);
-
-    int queryAllCountByMap(Map<String, String> map);
+    void addUserRoleBatch(List<UserRole> userRoleList);
 }

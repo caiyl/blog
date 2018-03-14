@@ -1,10 +1,12 @@
 package com.cai.blog.entity;
 
 
+import java.io.Serializable;
+
 /**
  * Created by caiyl on 2017/10/2.
  */
-public class UserEntity {
+public class User implements Serializable {
 
     private String id;
     private String userName;
@@ -12,9 +14,9 @@ public class UserEntity {
     private String password;
     private String userSex;
 
-    public UserEntity(){}
+    public User(){}
 
-    public UserEntity(String id, String userName, String userNameCN, String password, String userSex) {
+    public User(String id, String userName, String userNameCN, String password, String userSex) {
         this.id = id;
         this.userName = userName;
         this.userNameCN = userNameCN;

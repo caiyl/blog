@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cai.blog.mapper.RoleMapper" >
+    <resultMap id="BaseResultMap" type="com.cai.blog.entity.Role" >
+        <id column="id" property="id"  />
+        <result column="role_code" property="roleCode"  />
+        <result column="role_name" property="roleName"  />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, role_code, role_name
+    </sql>
+
+    <select id="getAll" resultMap="BaseResultMap"  >
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM t_role
+    </select>
+
+    <select id="getOne" parameterType="java.lang.String" resultMap="BaseResultMap" >
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM t_role
+        WHERE id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="com.cai.blog.entity.Role" >
+        INSERT INTO
+        t_role
+        (id, role_code, role_name)
+        VALUES
+        (#{id}, #{roleCode}, #{roleName})
+    </insert>
+
+    <update id="update" parameterType="com.cai.blog.entity.Role" >
+        UPDATE
+        t_role
+        SET
+        role_code = #{roleCode},
+        role_name = #{roleName}
+        WHERE
+        id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.String" >
+        DELETE FROM
+        t_role
+        WHERE
+        id =#{id}
+    </delete>
+
+
+    <select id="queryAllByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM t_role
+        where 1=1
+        <if test="roleCode != null"> and role_code = #{roleCode}</if>
+        <if test="roleName != null"> and role_name = #{roleName}</if>
+    </select>
+
+    <select id="queryAllCountByMap" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT
+        count(*)
+        FROM t_role
+        where 1=1
+        <if test="roleCode != null"> and role_code = #{roleCode}</if>
+        <if test="roleName != null"> and role_name = #{roleName}</if>
+    </select>
+
+</mapper>

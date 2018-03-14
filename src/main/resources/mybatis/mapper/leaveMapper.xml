@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cai.blog.mapper.LeaveMapper" >
+    <resultMap id="BaseResultMap" type="com.cai.blog.entity.Leave" >
+        <id column="id" property="id"  />
+        <result column="apply_time" property="applyTime"  />
+        <result column="start_time" property="startTime"  />
+        <result column="end_time" property="endTime"  />
+        <result column="leave_type" property="leaveType"  />
+        <result column="reason" property="reason"  />
+        <result column="user_id" property="userId"  />
+        <result column="process_instance_id" property="processInstanceId"  />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, apply_time, start_time,end_time,leave_type,reason,user_id,process_instance_id
+    </sql>
+
+    <select id="getAll" resultMap="BaseResultMap"  >
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM t_role
+    </select>
+
+    <select id="getLeaveId"  resultType="java.lang.Integer" >
+        select IFNULL(max(id)+1,1) from oa_leave
+    </select>
+
+    <insert id="insert" parameterType="com.cai.blog.entity.Leave" >
+        INSERT INTO
+        oa_leave
+        (id, apply_time, start_time,end_time,leave_type,reason,user_id,process_instance_id)
+        VALUES
+        (#{id}, #{applyTime}, #{startTime}, #{endTime}, #{leaveType}, #{reason}, #{userId}, #{processInstanceId})
+    </insert>
+
+    <update id="update" parameterType="com.cai.blog.entity.Leave" >
+        UPDATE
+        oa_leave
+        SET
+        apply_time = #{applyTime},
+        start_time = #{startTime},
+        end_time = #{endTime},
+        leave_type = #{leaveType},
+        reason = #{reason},
+        user_id = #{userId},
+        process_instance_id = #{processInstanceId}
+        WHERE
+        id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.String" >
+        DELETE FROM
+        t_role
+        WHERE
+        id =#{id}
+    </delete>
+
+
+    <select id="queryAllByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM t_role
+        where 1=1
+        <if test="roleCode != null"> and role_code = #{roleCode}</if>
+        <if test="roleName != null"> and role_name = #{roleName}</if>
+    </select>
+
+    <select id="queryAllCountByMap" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT
+        count(*)
+        FROM t_role
+        where 1=1
+        <if test="roleCode != null"> and role_code = #{roleCode}</if>
+        <if test="roleName != null"> and role_name = #{roleName}</if>
+    </select>
+
+</mapper>

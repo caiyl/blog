@@ -1,6 +1,6 @@
 package com.cai.blog.mapper;
 
-import com.cai.blog.entity.UserEntity;
+import com.cai.blog.entity.User;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,13 +31,13 @@ public class UserMapper2Test {
 
     @Test
     public void testQuery() throws Exception {
-        List<UserEntity> users = UserMapper.getAll();
+        List<User> users = UserMapper.getAll();
         System.out.println(users.toString());
     }
 
     @Test
     public void testUpdate() throws Exception {
-        UserEntity user = UserMapper.getOne(3l);
+        User user = UserMapper.getOne(3l);
         System.out.println(user.toString());
         user.setUserNameCN("王五2");
         UserMapper.update(user);
